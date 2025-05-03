@@ -1,6 +1,6 @@
 import time
 
-class task:
+class Task:
 
     def __init__(self, name, description, date):
         self.name = name
@@ -12,7 +12,7 @@ class task:
     def getname(self) ->str:
         return self.name  
     def getdescription(self) ->str:
-        return self.name  
+        return self.description
     def getdate(self) ->time:
         return self.name  
     def getprogress(self) ->bool :
@@ -21,8 +21,8 @@ class task:
     #mofiers
     def modifyname(self, name):
         self.name =name
-    def modifydesc(self, name):
-        self.name =name
+    def modifydesc(self, description):
+        self.description =description
 
     def modifydate(self, date):
         self.date = date
