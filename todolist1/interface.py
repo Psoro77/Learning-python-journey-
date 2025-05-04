@@ -8,27 +8,31 @@ class Interface:
     def __init__(self, manager :Taskmanager):
         self.manager= manager
         self.root= Tk()
-        self.title = Label(self.root, text='TO DO LIST')
-        self.title.pack() 
-        self.button1 = Button(self.root, text='add a task', width ='25', command= self.createpanel )
-        self.button1.pack()
+        self.title = Label(self.root, text="TO DO LIST", font=("Helvetica", 18, "bold"), bg="#f0f0f0", fg="#333")
+        self.title.pack(pady=10)
+        self.root.geometry("600x400")  #mainframe
+        self.root.configure(bg="#f0f0f0")
+        self.button1 = Button(self.root, text="Add a Task", width=20, font=("Helvetica", 12), 
+                              bg="#4CAF50", fg="white", command=self.createpanel)
+        self.button1.pack(pady=5)
 
         # afficher les taches
+        self.scrollbar = Scrollbar(self.root)
+        self.scrollbar.pack(side=RIGHT, fill=Y)
+        self.mylist = Listbox(self.root, yscrollcommand=self.scrollbar.set)
+        self.mylist.pack(side=LEFT, fill=BOTH)
+        self.scrollbar.config(command=self.mylist.yview) 
         self.showtask()
     def showtask(self):
         # Supprimer les anciens labels s'ils existent (pour éviter les doublons)
-        for widget in self.root.winfo_children():
-            if isinstance(widget, Label) and widget != self.title:
-                widget.destroy()
+        self.mylist.delete(0, END)
         for task in self.manager.tasklist :
             name = task.getname()
             description = task.getdescription()
             date = task.getdate().strftime('%Y-%m-%d')
         #je dois mettre chacun d'entre un dans un label puis les pack
-            task_text = f"{name}: {description} (Due: {date})"
-            task_label = Label(self.root, text=task_text)
-            task_label.pack()
-
+            self.mylist.insert(END, name + ':' + description + 'Due:' + date)   
+        self.scrollbar.config(command=self.mylist.yview) 
 
 
         self.root.mainloop()

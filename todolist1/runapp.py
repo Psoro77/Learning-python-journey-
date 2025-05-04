@@ -4,4 +4,3 @@ from interface import Interface
 
 manager = Taskmanager()
 panel = Interface(manager)
-
