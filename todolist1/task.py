@@ -1,11 +1,10 @@
-import time
-
+from datetime import datetime
 class Task:
 
     def __init__(self, name, description, date):
-        self.name = name
-        self.description =description
-        self.date = date
+        self.name : str= name
+        self.description : str  =description
+        self.date : datetime = date
         self.done = False
 
     #getters
@@ -13,8 +12,8 @@ class Task:
         return self.name  
     def getdescription(self) ->str:
         return self.description
-    def getdate(self) ->time:
-        return self.name  
+    def getdate(self) ->datetime:
+        return self.date  
     def getprogress(self) ->bool :
         return self.done
     
