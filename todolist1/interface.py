@@ -17,28 +17,71 @@ class Interface:
         self.button1.pack(pady=5)
 
         # afficher les taches
-        self.scrollbar = Scrollbar(self.root)
-        self.scrollbar.pack(side=RIGHT, fill=Y)
-        self.mylist = Listbox(self.root, yscrollcommand=self.scrollbar.set)
-        self.mylist.pack(side=LEFT, fill=BOTH)
-        self.scrollbar.config(command=self.mylist.yview) 
-        self.showtask()
-    def showtask(self):
-        # Supprimer les anciens labels s'ils existent (pour éviter les doublons)
-        self.mylist.delete(0, END)
-        for task in self.manager.tasklist :
-            name = task.getname()
-            description = task.getdescription()
-            date = task.getdate().strftime('%Y-%m-%d')
-        #je dois mettre chacun d'entre un dans un label puis les pack
-            self.mylist.insert(END, name + ':' + description + 'Due:' + date)   
-        self.scrollbar.config(command=self.mylist.yview) 
+        self.task_canvas = Canvas(self.root, bg="#f0f0f0", highlightthickness=0)
+        self.task_scrollbar = Scrollbar(self.root, orient=VERTICAL, command=self.task_canvas.yview)
+        self.task_frame = Frame(self.task_canvas, bg="#f0f0f0")
+        
+        self.task_canvas.configure(yscrollcommand=self.task_scrollbar.set)
+        self.task_scrollbar.pack(side=RIGHT, fill=Y)
+        self.task_canvas.pack(side=LEFT, fill=BOTH, expand=True, padx=10, pady=10)
+        
+        self.task_canvas.create_window((0, 0), window=self.task_frame, anchor="nw")
+        self.task_frame.bind("<Configure>", lambda e: self.task_canvas.configure(scrollregion=self.task_canvas.bbox("all")))
 
+        # Afficher les tâches
+        self.showtask()
 
         self.root.mainloop()
 
 
+    def showtask(self):
+        # Supprimer les anciens widgets dans task_frame
+        for widget in self.task_frame.winfo_children():
+            widget.destroy()
 
+        # Afficher chaque tâche
+        for idx, task in enumerate(self.manager.tasklist):
+            # Créer un cadre pour chaque tâche
+            task_frame = Frame(self.task_frame, bg="white", bd=1, relief=SOLID)
+            task_frame.pack(fill=X, padx=5, pady=5)
+
+            # Nom de la tâche
+            name = task.getname()
+            description = task.getdescription()
+            date_obj = task.getdate()
+            
+            # Vérifier que date_obj est valide
+            date_str = date_obj.strftime('%Y-%m-%d') 
+            
+            # Statut de la tâche
+            status = "Done" if task.getprogress() else "Pending"
+            status_color = "green" if task.getprogress() else "red"
+
+            # Afficher les informations
+            Label(task_frame, text=f"Task: {name}", font=("Helvetica", 12, "bold"), bg="white").pack(anchor="w", padx=5, pady=2)
+            Label(task_frame, text=f"Description: {description}", font=("Helvetica", 10), bg="white").pack(anchor="w", padx=5)
+            Label(task_frame, text=f"Due: {date_str}", font=("Helvetica", 10), bg="white").pack(anchor="w", padx=5)
+            Label(task_frame, text=f"Status: {status}", font=("Helvetica", 10), fg=status_color, bg="white").pack(anchor="w", padx=5)
+
+            # Boutons d'action
+            button_frame = Frame(task_frame, bg="white")
+            button_frame.pack(anchor="e", padx=5, pady=5)
+            if task.getprogress() :
+                Button(button_frame, text="Ongoing", width=8, bg="#f44336", fg="white", 
+                    command=lambda i=idx: self.donema(i)).pack(side=LEFT, padx=2)
+            else :
+                Button(button_frame, text="Done", width=8, bg="#4CAF50", fg="white", 
+                    command=lambda i=idx: self.donema(i)).pack(side=LEFT, padx=2)
+            Button(button_frame, text="Delete", width=8, bg="#f44336", fg="white", 
+                   command=lambda i=idx: self.deletema(i)).pack(side=LEFT, padx=2)
+            
+        
+    def deletema(self, n):
+        self.manager.deletetolist(n)
+        self.showtask()
+    def donema(self, n):
+        self.manager.setdone(n)
+        self.showtask()
     ##page for the creation of a task
     def createpanel(self):
         self.creawindow = Toplevel(self.root)  # Meilleur que Tk() pour une 2e fenêtre

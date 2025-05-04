@@ -27,7 +27,10 @@ class Task:
         self.date = date
 
     def donetask(self) :
-        self.done= True
+        if self.done :
+            self.done= False
+        else:    
+            self.done= True
     #tostring
     def __str__(self):
         return f"{self.name}({self.description})"
