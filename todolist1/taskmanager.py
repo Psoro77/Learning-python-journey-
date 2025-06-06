@@ -21,7 +21,9 @@ class Taskmanager :
         for row in self.cur.execute("SELECT name, description, date, done FROM tasks"):
             name, desc, date_str, done_int = row
             date_obj = datetime.fromisoformat(date_str)
-            self.tasklist.append(Task(name, desc, date_obj, bool(done_int),))
+
+            self.createtask(name, desc, date_obj)
+           # bool(done_int),
 
 
     # function to modify teh tasklist
@@ -32,7 +34,6 @@ class Taskmanager :
             "INSERT INTO tasks (name, description, date, done) VALUES (?, ?, ?, 0)",
             (name, description, date_str)
         )
-        id_ = self.cur.lastrowid
         self.conn.commit()
 
         ntask: Task = Task(name, description, date)
@@ -43,14 +44,15 @@ class Taskmanager :
 
     def deletetolist(self, n : int):
         self.tasklist.pop(n)
-
+        self.cur.execute("DELETE FROM tasks WHERE id = ?", (n,))
+        self.conn.commit()
     #modify the task 
     def setdone(self, n: int):
         self.tasklist[n].donetask() 
         task = self.tasklist[n]
         self.cur.execute(
             "UPDATE tasks SET done = ? WHERE id = ?",
-            (1 if task.done else 0, task.id)
+            (1 if task.done else 0, n)
         )
         self.conn.commit()
 
@@ -58,7 +60,8 @@ class Taskmanager :
     def getask(self, n: int) -> Task:
         return self.tasklist[n]
     
-
+    def close(self):
+        self.conn.close()
     
 
 

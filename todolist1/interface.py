@@ -32,7 +32,7 @@ class Interface:
         self.showtask()
 
         self.root.mainloop()
-
+        self.manager.close()
 
     def showtask(self):
         # Supprimer les anciens widgets dans task_frame
