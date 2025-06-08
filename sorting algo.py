@@ -6,7 +6,7 @@ mylist = []
 def askinput ():
     print('please enter some number enter s To stop the input')
     inp = input()
-    if inp == "s":
+    if inp == "s" or inp =='S' :
         if len(mylist)<=0 :  #check if the list is blank if its the case ask again w recursive call
             askinput()
         else : 
@@ -28,15 +28,34 @@ def askmethod():
         print('going sorted....')
         list2  = sorted(mylist)
         print('sorted list :', list2)
-        sys.exit
-    elif 'Selection'in meth:
-        selection()
+        return
+    elif 'selection'in meth:
+        list2 = selection(mylist)
+        print('Selection    sorted list :', list2)
+        return
     elif 'Buble'in meth:
         buble()
+        return
     elif 'insertion'in meth:
         insertion()
+        return
     elif 'quick'in meth:
         quick()
+        return
     else :
         askmethod() # recursive call if we dont find a match
+    return
+
+def selection(mylist):
+    for i in range(len(mylist)) : 
+        j=i
+        for j in range(len(mylist)):
+            temp = mylist[j]
+            if temp > mylist[i]:
+                mylist[j]=mylist[i]
+                mylist[i]=temp
+    return mylist
+
+
+
 askinput() 
