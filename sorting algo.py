@@ -33,7 +33,9 @@ def askmethod():
         list2 = selection(mylist)
         print('Selection    sorted list :', list2)
         return
-    elif 'Buble'in meth:
+    elif 'buble'in meth:
+        list2 = buble(mylist)
+        print('Buble sorted list :', list2)
         buble()
         return
     elif 'insertion'in meth:
@@ -56,6 +58,23 @@ def selection(mylist):
                 mylist[i]=temp
     return mylist
 
+#def buble():
+ #   for i in range(len(mylist)):
+  #      if i+2 > len(mylist) :
+   #         return mylist
+    #    if mylist[i] > mylist[i+1]:
+     #       mylist[i], mylist[i+1]= mylist[i+1], mylist[i]
+    #return mylist
+#i didnt did well the bublesort ill start over
+# 
+def buble(mylist):
+    for i in range(len(mylist)):
+        j=i+1
+        for j in range(len(mylist)) :
+            if mylist[j]<mylist[i]:
+                mylist[j], mylist[i]= mylist[i], mylist[j]
+            else : break
+    return mylist    
 
 
 askinput() 
