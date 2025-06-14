@@ -27,3 +27,37 @@ listest = ['banane', 'pomme', 'poire', 'fraise', 'pineaple']
 #     print(f"{i}: {listest[i]}")
 #je vais dessiner un triangle d'etoile avec l'input de l'user
 # je vais afficher les nombre premiers
+redo =True
+n = 0
+h=0
+while(redo):
+    print('please enter a integer')
+    sc =input()
+    try:
+        number =int(sc)
+        redo=False
+    except ValueError :
+        print('this is not an interger ')
+        redo= True
+# for n in range(n, number):
+#     for p in range(number-n-1):
+#         print(' ', end='')
+#     for j in range(n*2+1):
+#         print('*', end='')
+#     print('')
+#j'ai reussi a le faire assez facilement 
+# je vais essayer de faire un losange la
+for n in range(n, number):
+    for p in range(number-n-1):
+        print(' ', end='')
+    for j in range(n*2+1):
+        print('*', end='')
+    print('')
+for h in range(h, number):
+    if h == 0 :
+        continue
+    for p in range(h):
+        print(' ', end='')
+    for j in range(number*2-1-h*2):
+        print('*', end='')
+    print('')
