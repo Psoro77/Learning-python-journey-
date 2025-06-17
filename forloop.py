@@ -163,29 +163,55 @@ listnum = [22,21,1,2,3,4,99,56,7837,5,773,3763,892073,77,1,2,77,8272,99,5,5]
 # print(listnum)
 #pop enleve par rapport a l'index remove enleve l'occurence de la valeur dans la liste
 # programme pour demander un array et le decouper en deux
-redo = True
-listenc= []
-def stoparr(listen):
-    half= len(listen)/2
-    half =int(half)
-    listenc2 = listen[half:]
-    listen= listen[:half]
-    print(listen)
-    print(listenc2)
-    return
-while redo:
-    print('please enter a value |S to stop')
-    sc =input()
-    if sc ==('s' or 'S'):
-        redo= False
-        stoparr(listenc)
-        break
-    try :
-        nombre =int(sc)
-        listenc.append(nombre)
-        redo=True
-    except ValueError :
-        print('this is not an integer')
+# redo = True
+# listenc= []
+# def stoparr(listen):
+#     half= len(listen)/2
+#     half =int(half)
+#     listenc2 = listen[half:]
+#     listen= listen[:half]
+#     print(listen)
+#     print(listenc2)
+#     return
+# while redo:
+#     print('please enter a value |S to stop')
+#     sc =input()
+#     if sc ==('s' or 'S'):
+#         redo= False
+#         stoparr(listenc)
+#         break
+#     try :
+#         nombre =int(sc)
+#         listenc.append(nombre)
+#         redo=True
+#     except ValueError :
+#         print('this is not an integer')
+#inverser une liste:
+# listeinvers =listnum[::-1]
+# print(listeinvers)
+# #on peut utiliser la methode reverse mais elle retourne rien si on veux retrun un truc on utilise reversed
+# listnum.reverse()
+# print(listnum)
+#6 compression de liste :
+#Implémente compress([1, 1, 1, 2, 2, 3]) → [(1,3), (2,2), (3,1)]
+listest=[1, 1, 2, 2, 3,3,4,1]
+list2 =[]
+courant = listest[0]
+count=1
+for nombre in listest[1:]:
+    if nombre == courant:
+            count+=1
+    else :
+        list2.append((courant, count))
+        courant= nombre
+        count=1
+list2.append((courant, count))
+print(list2) 
+#ici append rajoute un lement tuple a la fin de la liste  
+# c'ets un algo assez simple qui check si le nombre est le meme si c'est le mme il augmente le count et il
+# recheck quand xc'est pas le cas on ajoute le tuple avec le nombre et le count dans une liste et on passe au suivant
+# c'est assez simple pour faire de la compression de base      
+
 
 
 
