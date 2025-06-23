@@ -1,4 +1,5 @@
 import pandas as pd
+import sys
 datas = {
     'cars': ["BMW", "Volvo", "Ford"],
   'passings': [3, 7, 2]
@@ -31,3 +32,4 @@ avion = pd.read_csv("C:/Users/USER/Downloads/airtravel.csv")
 print('')
 print(avion.head(10))
 print(avion.info())
+print(avion.loc[[0]])#prendre le firstrow
