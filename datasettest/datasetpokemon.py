@@ -29,3 +29,4 @@ mat.title("Distribution des vitesses")
 mat.xlabel("Vitesse")
 mat.ylabel("Nombre de Pokémon")
 mat.show()
+#ds1g.to_csv("1gpokspeed.csv", sep="\t") # creer le fichier csv contant le nouveau dataset

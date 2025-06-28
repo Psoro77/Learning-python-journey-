@@ -1,0 +1,11 @@
+Name	#	Type 1	Type 2	HP	Attack	Defense	Sp. Atk	Sp. Def	Speed	Generation	Legendary
+AlakazamMega Alakazam	65	Psychic		55	50	65	175	95	150	1	False
+AerodactylMega Aerodactyl	142	Rock	Flying	80	135	85	70	95	150	1	False
+BeedrillMega Beedrill	15	Bug	Poison	65	150	40	15	80	145	1	False
+MewtwoMega Mewtwo Y	150	Psychic		106	150	70	194	120	140	1	True
+Electrode	101	Electric		60	50	70	80	80	140	1	False
+GengarMega Gengar	94	Ghost	Poison	60	65	80	170	95	130	1	False
+Jolteon	135	Electric		65	65	60	110	95	130	1	False
+Aerodactyl	142	Rock	Flying	80	105	65	60	75	130	1	False
+MewtwoMega Mewtwo X	150	Psychic	Fighting	106	190	100	154	100	130	1	True
+Mewtwo	150	Psychic		106	110	90	154	90	130	1	True
