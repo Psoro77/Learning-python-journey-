@@ -1,7 +1,7 @@
 from collections import defaultdict
 
 # Initialiser ELO pour chaque équipe
-elo = defaultdict(lambda: 1000)
+elo = defaultdict(lambda: 1300)
 class EloRating:
     def __init__(self, base_score=1300, k_factor=80):
         self.elo = defaultdict(lambda: base_score)
